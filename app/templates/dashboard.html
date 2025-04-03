@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Stock Market Dashboard</h1>
+    <p>Track and analyze your favorite stocks in real-time</p>
+</div>
+
+<div class="market-overview">
+    <h2>Market Overview</h2>
+    <div class="market-indicators">
+        <div class="loading-spinner" id="market-indicators-loader">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <div id="market-indicators-content" class="hidden"></div>
+    </div>
+</div>
+
+<div class="popular-stocks">
+    <h2>Popular Stocks</h2>
+    <div class="loading-spinner" id="popular-stocks-loader">
+        <i class="fas fa-spinner fa-spin"></i>
+    </div>
+    <div class="stocks-grid" id="popular-stocks-grid">
+        <!-- Stock cards will be inserted here via JavaScript -->
+    </div>
+</div>
+
+<div class="stock-chart-container">
+    <h2>Market Trends</h2>
+    <div class="chart-controls">
+        <select id="chart-timeframe">
+            <option value="1d">1 Day</option>
+            <option value="1w" selected>1 Week</option>
+            <option value="1m">1 Month</option>
+            <option value="3m">3 Months</option>
+            <option value="1y">1 Year</option>
+        </select>
+        <select id="chart-type">
+            <option value="line">Line</option>
+            <option value="candle" selected>Candlestick</option>
+            <option value="ohlc">OHLC</option>
+        </select>
+    </div>
+    <div class="loading-spinner" id="trend-chart-loader">
+        <i class="fas fa-spinner fa-spin"></i>
+    </div>
+    <div id="trend-chart"></div>
+</div>
+
+<div class="watchlist-section">
+    <h2>Your Watchlist</h2>
+    <div id="watchlist-empty" class="empty-message">
+        <i class="fas fa-star fa-2x" style="margin-bottom: 1rem; color: var(--primary-color);"></i>
+        <p>Your watchlist is empty</p>
+        <p class="text-secondary" style="font-size: 0.9rem; margin-top: 0.5rem;">Search for stocks and add them to start
+            tracking</p>
+    </div>
+    <div id="watchlist-container" class="stocks-grid"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/dashboard.js') }}"></script>
+{% endblock %}
