@@ -554,7 +554,7 @@ function updateChart() {
             const oneDayAgo = new Date(now);
             oneDayAgo.setDate(now.getDate() - 1);
             console.log("1d filter - date threshold:", oneDayAgo);
-            
+
             filteredPrices = allPrices.filter(price => {
                 const priceDate = new Date(price.date);
                 return priceDate >= oneDayAgo;
@@ -565,7 +565,7 @@ function updateChart() {
             const oneWeekAgo = new Date(now);
             oneWeekAgo.setDate(now.getDate() - 7);
             console.log("1w filter - date threshold:", oneWeekAgo);
-            
+
             filteredPrices = allPrices.filter(price => {
                 const priceDate = new Date(price.date);
                 return priceDate >= oneWeekAgo;
@@ -576,7 +576,7 @@ function updateChart() {
             const oneMonthAgo = new Date(now);
             oneMonthAgo.setMonth(now.getMonth() - 1);
             console.log("1m filter - date threshold:", oneMonthAgo);
-            
+
             filteredPrices = allPrices.filter(price => {
                 const priceDate = new Date(price.date);
                 return priceDate >= oneMonthAgo;
@@ -587,7 +587,7 @@ function updateChart() {
             const threeMonthsAgo = new Date(now);
             threeMonthsAgo.setMonth(now.getMonth() - 3);
             console.log("3m filter - date threshold:", threeMonthsAgo);
-            
+
             filteredPrices = allPrices.filter(price => {
                 const priceDate = new Date(price.date);
                 return priceDate >= threeMonthsAgo;
@@ -598,7 +598,7 @@ function updateChart() {
             const oneYearAgo = new Date(now);
             oneYearAgo.setFullYear(now.getFullYear() - 1);
             console.log("1y filter - date threshold:", oneYearAgo);
-            
+
             filteredPrices = allPrices.filter(price => {
                 const priceDate = new Date(price.date);
                 return priceDate >= oneYearAgo;
@@ -612,7 +612,7 @@ function updateChart() {
             // Default to last 30 days
             const thirtyDaysAgo = new Date(now);
             thirtyDaysAgo.setDate(now.getDate() - 30);
-            
+
             filteredPrices = allPrices.filter(price => {
                 const priceDate = new Date(price.date);
                 return priceDate >= thirtyDaysAgo;
@@ -626,7 +626,7 @@ function updateChart() {
         console.warn(`No data found for timeframe ${activeTimeframe}, using all available data`);
         filteredPrices = allPrices;
     }
-    
+
     // Sort by date (oldest first for proper chart rendering)
     filteredPrices.sort((a, b) => new Date(a.date) - new Date(b.date));
 
@@ -635,7 +635,7 @@ function updateChart() {
     const lastPrice = filteredPrices[filteredPrices.length - 1]?.close || 0;
     const priceChange = lastPrice - firstPrice;
     const isPositive = priceChange >= 0;
-    
+
     // Set chart colors based on price direction (Google Finance style)
     const chartColor = isPositive ? 'rgb(0, 200, 5)' : 'rgb(255, 80, 0)';
     const chartFillColor = isPositive ? 'rgba(0, 200, 5, 0.1)' : 'rgba(255, 80, 0, 0.1)';
@@ -684,7 +684,7 @@ function updateChart() {
             marker: {
                 color: filteredPrices.map((price, i) => {
                     return i > 0 ?
-                        (price.close >= filteredPrices[i-1].close ? 'rgba(0, 200, 5, 0.5)' : 'rgba(255, 80, 0, 0.5)') :
+                        (price.close >= filteredPrices[i - 1].close ? 'rgba(0, 200, 5, 0.5)' : 'rgba(255, 80, 0, 0.5)') :
                         'rgba(0, 200, 5, 0.5)';
                 })
             }
@@ -698,7 +698,7 @@ function updateChart() {
 
     // Update the chart
     Plotly.react(chartContainer, traces);
-    
+
     // Add price comparison line (Google Finance feature)
     if (filteredPrices.length > 0) {
         const firstPrice = filteredPrices[0].close;
@@ -724,7 +724,7 @@ function updateChart() {
             'yaxis.title': ''
         });
     }
-    
+
     // Update chart statistics
     addChartStatistics(filteredPrices);
 }
